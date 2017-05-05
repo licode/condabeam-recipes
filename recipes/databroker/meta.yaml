@@ -1,0 +1,44 @@
+{% set version = "0.7.0" %}
+
+package:
+  name: databroker
+  version: {{ version }}
+
+source:
+  url: https://github.com/NSLS-II/databroker/archive/v{{ version }}.tar.gz
+  fn: databroker-v{{ version }}.tar.gz
+
+build:
+  number: 3
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  build:
+    - python
+    - setuptools
+  run:
+    - attrs
+    - boltons
+    - cytoolz
+    - doct
+    - filestore >=0.5.0
+    - metadatastore >=0.5.1
+    - numpy
+    - pandas
+    - pims
+    - python
+    - pytz
+    - six
+    - requests
+    - singledispatch [py27]
+    - tzlocal
+
+test:
+  requires:
+    - nslsii_dev_configuration
+  imports:
+    - databroker
+
+about:
+  home: https://github.com/NSLS-II/databroker
+  license: BSD
